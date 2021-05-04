@@ -2,8 +2,13 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { connectToDatabase } from "../../util/mongodb";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { IPost } from "../../interfaces/post";
 
-export default function Post({ post }) {
+interface IPostProps {
+  post:IPost
+}
+
+export default function Post({ post }:IPostProps) {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -50,18 +55,18 @@ export default function Post({ post }) {
   );
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps<IPostProps> = async (context) => {
   const { db } = await connectToDatabase();
-  console.log(
-    "*********************path:" + context.params.slug + "*******************"
-  );
-  const post = await db
+
+  const post:IPost = await db
     .collection("posts")
     .findOne({ slug: context.params.slug });
+
+  const postProps:IPostProps = {
+    post: JSON.parse(JSON.stringify(post)),
+  }
   return {
-    props: {
-      post: JSON.parse(JSON.stringify(post)),
-    },
+    props: postProps
   };
 }
 
