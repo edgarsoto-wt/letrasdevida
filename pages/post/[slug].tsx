@@ -3,33 +3,40 @@ import { connectToDatabase } from "../../util/mongodb";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { IPost } from "../../interfaces/post";
+import ContentItemText from "../../components/ContentItem/ContentItemText";
+import ContentItemTextImage from "../../components/ContentItem/ContentItemTextImage";
 
 interface IPostProps {
-  post:IPost
+  post: IPost;
 }
 
-export default function Post({ post }:IPostProps) {
+export default function Post({ post }: IPostProps) {
   const router = useRouter();
   const { slug } = router.query;
 
   const generateContent = (content) => {
-
-    return content.map((contentItem)=> {
-      switch (contentItem.type){
-        case 'text': {
-          return (<p>{contentItem.text}</p>)
+    return content.map((contentItem, index) => {
+      switch (contentItem.type) {
+        case "text": {
+          return (
+            <ContentItemText
+              key={`content-item-${index}`}
+              text={contentItem.text}
+            />
+          );
         }
-        case 'text-image': {
-          return (<>
-            <img src={contentItem.image} alt="" />
-            <p>{contentItem.text}</p>
-          </>)
+        case "text-image": {
+          return (
+            <ContentItemTextImage
+              key={`content-item-${index}`}
+              image={contentItem.image}
+              text={contentItem.text}
+            />
+          );
         }
       }
     });
-
-
-  }
+  };
 
   return (
     <>
@@ -46,29 +53,28 @@ export default function Post({ post }:IPostProps) {
       </div>
       <small>{post.publish_date}</small>
 
-      <br/><br/><br/>
-      <div>
-      {generateContent(post.content)}
-      </div>
+      <br />
+      <br />
+      <br />
+      <div>{generateContent(post.content)}</div>
     </>
-   
   );
 }
 
 export const getStaticProps: GetStaticProps<IPostProps> = async (context) => {
   const { db } = await connectToDatabase();
 
-  const post:IPost = await db
+  const post: IPost = await db
     .collection("posts")
     .findOne({ slug: context.params.slug });
 
-  const postProps:IPostProps = {
+  const postProps: IPostProps = {
     post: JSON.parse(JSON.stringify(post)),
-  }
-  return {
-    props: postProps
   };
-}
+  return {
+    props: postProps,
+  };
+};
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {

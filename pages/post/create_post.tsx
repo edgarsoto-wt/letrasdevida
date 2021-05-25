@@ -4,10 +4,22 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { IAutor, IPost } from "../../interfaces/post";
 import Button from '@material-ui/core/Button';
+import { useState } from "react";
+import CreateContentItem from "../../components/CreateContentItem/CreateContentItem";
 
 
 export default function CreatePost() {
 
+
+  const [openContentItem, setOpenContentItem] = useState(false);
+
+  const handleOpen = () => {
+    setOpenContentItem(true);
+  };
+
+  const handleClose = () => {
+    setOpenContentItem(false);
+  };
 
     const authors: Array<IAutor> = [{
       email: 'edgar@letrasdevida.com',
@@ -83,6 +95,12 @@ export default function CreatePost() {
 
         <Button variant="contained" type="submit">Create Post</Button>
       </form>
+
+      <button type="button" onClick={handleOpen}>
+        Open Modal
+      </button>
+
+      <CreateContentItem isOpen={openContentItem} closeFunction={handleClose} />
       
     </>
    

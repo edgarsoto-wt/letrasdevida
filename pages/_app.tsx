@@ -1,8 +1,27 @@
 // import App from "next/app";
-import type { AppProps /*, AppContext */ } from 'next/app'
+import type { AppProps /*, AppContext */ } from "next/app";
+import Layout from "../components/Layout/Layout";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { theme } from "./theme/App.theme";
+import { CssBaseline } from "@material-ui/core";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+
+  useEffect(() => {
+    const jssStyles = document.querySelector('#jss-server-side')
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles)
+    }
+  }, []);
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
@@ -17,4 +36,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default MyApp
+export default MyApp;
