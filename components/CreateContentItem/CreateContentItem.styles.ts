@@ -18,8 +18,4 @@ export const useStyles = makeStyles((theme) => ({
   text: {
     width: "100%",
   },
-  img: {
-    width: "100%",
-    height: "auto",
-  },
 }));
