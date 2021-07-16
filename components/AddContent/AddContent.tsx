@@ -21,6 +21,7 @@ export default function AddContent({ addContentItem }: IProps) {
       type: ContentType.text,
     };
     addContentItem(textContentItem);
+    setIsOpen(false);
   };
   const createTextImageContentItem = () => {
     const textImageContentItem: ITextImage = {
@@ -29,6 +30,7 @@ export default function AddContent({ addContentItem }: IProps) {
       image: "",
     };
     addContentItem(textImageContentItem);
+    setIsOpen(false);
   };
   return (
     <div className={classes.root}>

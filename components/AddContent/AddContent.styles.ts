@@ -7,10 +7,10 @@ export interface StyleProps {
 export const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   root: {
     margin: "10px 0",
+    display: "inline-block",
   },
   options: {
-    visibility: (props) => (props.isOpen ? "visible" : "hidden"),
-    display: "inline-block",
+    display: (props) => (props.isOpen ? "inline-block" : "none"),
     marginLeft: "20px",
   },
   option: {
