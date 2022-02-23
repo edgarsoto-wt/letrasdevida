@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { connectToDatabase } from "../../util/mongodb";
+// import { connectToDatabase } from "../../util/mongodb";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import CreateContentItem from "../../components/CreateContentItem/CreateContentItem";
 import AddContent from "../../components/AddContent/AddContent";
-import { useStyles } from "./create_post_v2.styles";
+import { useStyles } from "../../Styles/create_post_v2.styles";
 import TextContentItem from "../../components/ContentItem/TextContentItem";
 import TextImageContentItem from "../../components/ContentItem/TextImageContentItem";
 
@@ -33,7 +33,7 @@ export default function CreatePostV2() {
         return <TextContentItem contentItem={contentItem} />;
         break;
       case ContentType.textImage:
-        return <TextImageContentItem contentItem={contentItem} />;
+        // return <TextImageContentItem contentItem={contentItem} />;
         break;
 
       default:

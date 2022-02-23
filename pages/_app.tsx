@@ -2,16 +2,15 @@
 import type { AppProps /*, AppContext */ } from "next/app";
 import Layout from "../components/Layout/Layout";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { theme } from "./theme/App.theme";
+import { theme } from "../Styles/theme/App.theme";
 import { CssBaseline } from "@material-ui/core";
 import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side')
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles)
+      jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
   return (
