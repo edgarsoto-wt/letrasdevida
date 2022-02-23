@@ -41,6 +41,7 @@ export default function Post() {
 
   return (
     <>
+      hello world
       {/* <Head>
         <title>Letras de Vida - Post: {slug}</title>
         <link rel="icon" href="/favicon.ico" />
