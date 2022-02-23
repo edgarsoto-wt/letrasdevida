@@ -5,7 +5,7 @@ export default function Components() {
     <>
       <h1>Components</h1>
 
-      <AddContent />
+      {/* <AddContent /> */}
     </>
   );
 }
